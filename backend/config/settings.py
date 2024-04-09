@@ -37,7 +37,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+    'django.contrib.sites',
+
+
+    'rest_framework',
+    'rest_framework.authtoken',
+    
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+     
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
+
+
+    'blog.apps.BlogConfig',
+    'api.apps.ApiConfig',
+ 
+      ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -121,3 +142,28 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'api.permissions.IsStaffOrReadOnly',
+    ],
+   
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+     #   'rest_framework_simplejwt.authentication.JWTAuthentication',
+               
+    ),
+}
+
+
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'access',
+    'JWT_AUTH_REFRESH_COOKIE': 'refresh',
+}
+SITE_ID = 1
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" 
